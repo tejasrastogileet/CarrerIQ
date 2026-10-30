@@ -8,17 +8,21 @@ public class OllamaAiService : IAiService
 {
     private readonly HttpClient _httpClient;
     private readonly IConfiguration _configuration;
+    private readonly IRagContextService _ragContextService;
 
     public OllamaAiService(
         HttpClient httpClient,
-        IConfiguration configuration)
+        IConfiguration configuration,
+        IRagContextService ragContextService)
     {
         _httpClient = httpClient;
         _configuration = configuration;
+        _ragContextService = ragContextService;
     }
 
     public async Task<ResumeAnalysisResponse> AnalyzeResumeAsync(
-        string resumeText)
+        string resumeText,
+        CancellationToken cancellationToken = default)
     {
         if (string.IsNullOrWhiteSpace(resumeText))
         {
@@ -28,39 +32,12 @@ public class OllamaAiService : IAiService
         }
 
         var model = _configuration["Ollama:Model"] ?? "gemma3";
+        var retrievedContext = await _ragContextService.GetRelevantContextAsync(
+            resumeText,
+            cancellationToken);
 
-        var prompt = """
-            You are an AI resume analyzer.
-
-            Analyze the following resume.
-
-            Identify:
-
-            1. Skills
-            2. Strengths
-            3. Weaknesses
-            4. Recommendations
-
-            IMPORTANT:
-            Return ONLY valid JSON.
-            Do NOT use markdown.
-            Do NOT use code fences.
-            Do NOT include any explanation before or after the JSON.
-
-            The JSON must have exactly this structure:
-
-            {
-                "skills": [],
-                "strengths": [],
-                "weaknesses": [],
-                "recommendations": []
-            }
-
-            Resume:
-            """;
-
-        prompt += Environment.NewLine;
-        prompt += resumeText;
+        var prompt = ResumeAnalysisPrompt.Create(resumeText, retrievedContext)
+            .ToOllamaPrompt();
 
         var request = new
         {
@@ -76,95 +53,58 @@ public class OllamaAiService : IAiService
         {
             response = await _httpClient.PostAsJsonAsync(
                 "/api/generate",
-                request);
+                request,
+                cancellationToken);
         }
-        catch (HttpRequestException ex)
+        catch (HttpRequestException exception)
         {
             throw new InvalidOperationException(
                 "Unable to connect to Ollama. Make sure Ollama is running.",
-                ex);
+                exception);
         }
-
-        if (!response.IsSuccessStatusCode)
-        {
-            var error = await response.Content.ReadAsStringAsync();
-
-            throw new InvalidOperationException(
-                $"Ollama returned HTTP {(int)response.StatusCode}: {error}");
-        }
-
-        var result = await response.Content
-            .ReadFromJsonAsync<OllamaResponse>();
-
-        if (result == null)
+        catch (TaskCanceledException exception) when (!cancellationToken.IsCancellationRequested)
         {
             throw new InvalidOperationException(
-                "Ollama returned an empty response.");
+                "Ollama did not respond before the analysis timed out.",
+                exception);
         }
 
-        if (string.IsNullOrWhiteSpace(result.Response))
+        using (response)
         {
-            throw new InvalidOperationException(
-                "Ollama returned an empty AI response.");
-        }
 
-        Console.WriteLine();
-        Console.WriteLine("========== RAW OLLAMA RESPONSE ==========");
-        Console.WriteLine(result.Response);
-        Console.WriteLine("==========================================");
-        Console.WriteLine();
-
-        var cleanedResponse = CleanJsonResponse(result.Response);
-
-        try
-        {
-            var analysis =
-                JsonSerializer.Deserialize<ResumeAnalysisResponse>(
-                    cleanedResponse,
-                    new JsonSerializerOptions
-                    {
-                        PropertyNameCaseInsensitive = true
-                    });
-
-            if (analysis == null)
+            if (!response.IsSuccessStatusCode)
             {
                 throw new InvalidOperationException(
-                    "AI response could not be converted to the expected format.");
+                    $"Ollama returned HTTP {(int)response.StatusCode}.");
             }
 
-            return analysis;
-        }
-        catch (JsonException ex)
-        {
-            throw new InvalidOperationException(
-                "Ollama returned invalid JSON. " +
-                $"Raw response: {result.Response}",
-                ex);
-        }
-    }
+            OllamaResponse? result;
+            try
+            {
+                result = await response.Content
+                    .ReadFromJsonAsync<OllamaResponse>(cancellationToken: cancellationToken);
+            }
+            catch (JsonException exception)
+            {
+                throw new InvalidOperationException(
+                    "Ollama returned an invalid response.",
+                    exception);
+            }
 
-    private static string CleanJsonResponse(string response)
-    {
-        response = response.Trim();
+            if (result == null)
+            {
+                throw new InvalidOperationException(
+                    "Ollama returned an empty response.");
+            }
 
-        // Remove markdown code fence if the model still returns one.
-        if (response.StartsWith(
-                "```json",
-                StringComparison.OrdinalIgnoreCase))
-        {
-            response = response["```json".Length..];
-        }
-        else if (response.StartsWith("```"))
-        {
-            response = response["```".Length..];
-        }
+            if (string.IsNullOrWhiteSpace(result.Response))
+            {
+                throw new InvalidOperationException(
+                    "Ollama returned an empty AI response.");
+            }
 
-        if (response.EndsWith("```"))
-        {
-            response = response[..^3];
+            return ResumeAnalysisResponseParser.Parse(result.Response, "Ollama");
         }
-
-        return response.Trim();
     }
 
     private sealed class OllamaResponse

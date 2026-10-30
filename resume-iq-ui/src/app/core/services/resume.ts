@@ -47,4 +47,14 @@ export class ResumeService {
 
       );
   }
+
+  analyzeResumeFile(file: File): Observable<ResumeAnalysis> {
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+
+    return this.http.post<ResumeAnalysis>(
+      `${this.apiUrl}/analyze-file`,
+      formData
+    );
+  }
 }
