@@ -1,0 +1,6 @@
+@ResumeIQ.API_HostAddress = http://localhost:5155
+
+GET {{ResumeIQ.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,432 @@
+<div class="site-shell">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#home" aria-label="CareerIQ home" (click)="closeMobileMenu()">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 36 36" fill="none">
+            <path d="M18 3.5 31 11v14L18 32.5 5 25V11L18 3.5Z" fill="currentColor" opacity=".14" />
+            <path d="M12 23V13h3.1l6.9 6.1V13h3v10h-3l-7-6.2V23h-3Z" fill="currentColor" />
+          </svg>
+        </span>
+        <span>Career<span class="brand-accent">IQ</span></span>
+      </a>
+
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-controls="primary-navigation"
+        [attr.aria-expanded]="mobileMenuOpen()"
+        aria-label="Toggle navigation"
+        (click)="toggleMobileMenu()">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav id="primary-navigation" class="primary-nav" [class.is-open]="mobileMenuOpen()" aria-label="Main navigation">
+        <a href="#features" (click)="closeMobileMenu()">Features</a>
+        <a href="#how-it-works" (click)="closeMobileMenu()">How it works</a>
+        <a href="#benefits" (click)="closeMobileMenu()">Benefits</a>
+        <a href="#faq" (click)="closeMobileMenu()">FAQ</a>
+        <a class="button button-primary nav-cta" href="#analyzer" (click)="closeMobileMenu()">Analyze my resume <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-section" id="home">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="eyebrow-dot"></span> Your career, with clarity</div>
+          <h1>Your next career move starts with a <span>smarter resume.</span></h1>
+          <p class="hero-description">
+            Unlock your resume's potential with AI-powered insights, skill analysis, and actionable recommendations to stand out in today's competitive job market.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary button-large" href="#analyzer">Analyze my resume <span aria-hidden="true">↗</span></a>
+            <a class="button button-secondary button-large" href="#features"><span class="play-icon" aria-hidden="true">↓</span> Explore features</a>
+          </div>
+          <div class="hero-proof">
+            <span class="proof-icon" aria-hidden="true">✦</span>
+            <span>Thoughtful insights. Your next step, made clearer.</span>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-label="Illustrative preview of the CareerIQ resume analysis dashboard">
+          <div class="visual-orb orb-one"></div>
+          <div class="visual-orb orb-two"></div>
+          <div class="dashboard-card">
+            <div class="dashboard-topbar">
+              <div>
+                <span class="dashboard-kicker">CAREERIQ INSIGHTS</span>
+                <h2>Resume overview</h2>
+              </div>
+              <span class="dashboard-menu" aria-hidden="true">•••</span>
+            </div>
+            <div class="demo-label"><span></span> Illustrative preview · sample data</div>
+            <div class="score-row">
+              <div class="score-ring"><div><strong>86</strong><small>/ 100</small></div></div>
+              <div class="score-copy">
+                <strong>Looking promising</strong>
+                <span>Your experience has a strong foundation.</span>
+                <div class="score-meter"><span></span></div>
+              </div>
+            </div>
+            <div class="dashboard-divider"></div>
+            <div class="preview-stat">
+              <div class="stat-icon ats-icon" aria-hidden="true">✓</div>
+              <div class="stat-main"><strong>ATS compatibility</strong><span>Clear structure detected</span></div>
+              <span class="stat-status">Strong</span>
+            </div>
+            <div class="preview-stat skills-stat">
+              <div class="stat-icon skills-icon" aria-hidden="true">✳</div>
+              <div class="stat-main"><strong>Skills analysis</strong><span>Relevant strengths surfaced</span></div>
+              <div class="mini-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+            </div>
+            <div class="suggestion-preview">
+              <div class="suggestion-heading"><span class="sparkle" aria-hidden="true">✦</span><strong>One way to improve</strong></div>
+              <p>Make your impact easier to scan with specific outcomes.</p>
+            </div>
+            <div class="dashboard-footnote">Visual sample only — not a real analysis result.</div>
+          </div>
+          <div class="floating-note note-top"><span class="note-check">✓</span><span><strong>Skills, made visible</strong><small>Insight at a glance</small></span></div>
+          <div class="floating-note note-bottom"><span class="note-sparkle">✦</span><span><strong>Clear next steps</strong><small>Built around your resume</small></span></div>
+        </div>
+      </div>
+      <div class="hero-bottom-glow" aria-hidden="true"></div>
+    </section>
+
+    <section class="benefits-section section-pad" id="benefits">
+      <div class="container">
+        <div class="benefits-panel">
+          <div class="benefits-intro">
+            <span class="eyebrow">A better way forward</span>
+            <h2>Make your experience <span>work harder.</span></h2>
+          </div>
+          <div class="benefit-item">
+            <span class="benefit-icon violet-icon" aria-hidden="true">✦</span>
+            <div><strong>AI-powered insights</strong><p>See your resume through a sharper lens.</p></div>
+          </div>
+          <div class="benefit-item">
+            <span class="benefit-icon blue-icon" aria-hidden="true">↗</span>
+            <div><strong>Actionable guidance</strong><p>Turn observations into practical next steps.</p></div>
+          </div>
+          <div class="benefit-item">
+            <span class="benefit-icon mint-icon" aria-hidden="true">⌑</span>
+            <div><strong>Privacy-conscious</strong><p>Your resume is used to provide this analysis.</p></div>
+          </div>
+          <div class="benefit-item">
+            <span class="benefit-icon amber-icon" aria-hidden="true">≋</span>
+            <div><strong>Clearer storytelling</strong><p>Make key details easier to find and read.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features-section section-pad" id="features">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">A more confident application</span>
+          <h2>Everything you need to <span>move forward.</span></h2>
+          <p>Useful perspective on what is already working — and where a small change could make a difference.</p>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <span class="feature-icon icon-purple" aria-hidden="true">✧</span>
+            <h3>AI resume analysis</h3>
+            <p>Get a clear, considered read of the experience and story in your resume.</p>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </article>
+          <article class="feature-card">
+            <span class="feature-icon icon-blue" aria-hidden="true">◈</span>
+            <h3>Strengths &amp; opportunities</h3>
+            <p>Understand the strengths that stand out and the areas worth refining.</p>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </article>
+          <article class="feature-card">
+            <span class="feature-icon icon-mint" aria-hidden="true">⌘</span>
+            <h3>Skills intelligence</h3>
+            <p>Bring your skills into focus and see the capabilities your resume communicates.</p>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </article>
+          <article class="feature-card">
+            <span class="feature-icon icon-amber" aria-hidden="true">↗</span>
+            <h3>Actionable suggestions</h3>
+            <p>Find practical ways to make your experience more specific and compelling.</p>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </article>
+          <article class="feature-card">
+            <span class="feature-icon icon-rose" aria-hidden="true">▤</span>
+            <h3>ATS readiness</h3>
+            <p>Get guidance on clarity and structure to help your resume scan more cleanly.</p>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </article>
+          <article class="feature-card">
+            <span class="feature-icon icon-indigo" aria-hidden="true">⌖</span>
+            <h3>Career growth insights</h3>
+            <p>Use your resume as a starting point for your next thoughtful career move.</p>
+            <span class="card-arrow" aria-hidden="true">↗</span>
+          </article>
+        </div>
+        <p class="feature-disclaimer">AI insights are a helpful starting point, not a guarantee of hiring outcomes.</p>
+      </div>
+    </section>
+
+    <section class="workflow-section section-pad" id="how-it-works">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Simple by design</span>
+          <h2>Three steps to a <span>stronger story.</span></h2>
+          <p>No complicated setup. Just a little clarity on what to do next.</p>
+        </div>
+        <div class="workflow-grid">
+          <article class="workflow-step">
+            <div class="step-top"><span class="step-number">01</span><span class="step-line"></span><span class="step-icon" aria-hidden="true">▤</span></div>
+            <h3>Share your resume</h3>
+            <p>Paste your resume text into the secure analyzer to get started.</p>
+          </article>
+          <article class="workflow-step">
+            <div class="step-top"><span class="step-number">02</span><span class="step-line"></span><span class="step-icon" aria-hidden="true">✦</span></div>
+            <h3>Get an AI perspective</h3>
+            <p>CareerIQ reviews your skills, strengths, and opportunities to improve.</p>
+          </article>
+          <article class="workflow-step">
+            <div class="step-top"><span class="step-number">03</span><span class="step-icon" aria-hidden="true">↗</span></div>
+            <h3>Make your next move</h3>
+            <p>Use practical recommendations to refine your resume with confidence.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="analyzer-section section-pad" id="analyzer">
+      <div class="container analyzer-layout">
+        <div class="analyzer-intro">
+          <span class="eyebrow eyebrow-light"><span class="eyebrow-dot"></span> Your next step starts here</span>
+          <h2>Ready to see your resume in a new light?</h2>
+          <p>Upload your resume and get a thoughtful analysis of your skills, strengths, and areas to improve.</p>
+          <div class="privacy-note"><span aria-hidden="true">⌑</span><span><strong>Know where your resume goes.</strong><br>Resume text is sent to Groq's API for AI analysis. Only submit information you are comfortable sharing with that service.</span></div>
+        </div>
+
+        <div class="analyzer-card">
+          <div class="analyzer-card-heading">
+            <div>
+              <span class="analyzer-step">CAREERIQ ANALYZER</span>
+              <h3>Start with your resume</h3>
+            </div>
+            <span class="analyzer-card-icon" aria-hidden="true">✧</span>
+          </div>
+          <p class="analyzer-hint">Upload a resume file and CareerIQ will extract its text before analysis. Maximum file size: 10 MB.</p>
+          <div
+            class="file-drop-zone"
+            [class.is-dragging]="isDragging()"
+            (dragover)="onDragOver($event)"
+            (dragleave)="onDragLeave($event)"
+            (drop)="onFileDrop($event)">
+            <input
+              #resumeFileInput
+              id="resumeFile"
+              class="resume-file-input"
+              type="file"
+              [accept]="acceptedFileTypes"
+              aria-describedby="file-help"
+              (change)="onFileInputChange($event)">
+            <div class="upload-icon" aria-hidden="true">↑</div>
+            <strong>Drop your resume here</strong>
+            <span class="upload-or">or</span>
+            <label class="button button-secondary browse-button" for="resumeFile">Browse files</label>
+            <span id="file-help" class="file-help">PDF, DOCX, DOC, or CSV · up to 10 MB</span>
+          </div>
+          @if (isValidatingFile()) {
+            <div class="file-checking" role="status">
+              <span class="loading-spinner checking-spinner" aria-hidden="true"></span>
+              Checking the file type and content...
+            </div>
+          }
+          @if (selectedFile(); as file) {
+            <div class="selected-file">
+              <span class="selected-file-icon" aria-hidden="true">▤</span>
+              <span class="selected-file-details">
+                <strong>{{ file.name }}</strong>
+                <small>{{ formatFileSize(file.size) }} · file validated</small>
+              </span>
+              <button
+                type="button"
+                class="remove-file"
+                aria-label="Remove selected resume file"
+                (click)="clearSelectedFile(resumeFileInput)">×</button>
+            </div>
+          }
+          <details class="paste-fallback">
+            <summary>Prefer to paste resume text instead?</summary>
+            <div class="resume-input-wrap">
+              <label for="resumeText">Resume text</label>
+              <textarea
+                id="resumeText"
+                [(ngModel)]="resumeText"
+                (ngModelChange)="onResumeTextChanged(resumeFileInput)"
+                aria-describedby="resume-count"
+                placeholder="Paste your resume here — experience, skills, education, and anything else you'd like feedback on..."
+                rows="7"></textarea>
+              <div class="input-meta">
+                <span>Text is sent to the existing CareerIQ analysis API.</span>
+                <span id="resume-count">{{ resumeText.length }} characters</span>
+              </div>
+            </div>
+          </details>
+          @if (errorMessage()) {
+            <div class="form-error" role="alert"><span aria-hidden="true">!</span>{{ errorMessage() }}</div>
+          }
+          <button
+            type="button"
+            class="button button-primary analyze-button"
+            [disabled]="isLoading() || isValidatingFile() || (!selectedFile() && !resumeText.trim())"
+            [attr.aria-busy]="isLoading() || isValidatingFile()"
+            (click)="analyzeResume()">
+            @if (isValidatingFile()) {
+              <span class="loading-spinner" role="status" aria-label="Validating selected file"></span>
+              Validating file...
+            } @else if (isLoading()) {
+              <span class="loading-spinner" role="status" aria-label="Analyzing resume"></span>
+              Analyzing resume...
+            } @else {
+              Analyze resume <span aria-hidden="true">↗</span>
+            }
+          </button>
+          <p class="analyzer-footnote">CareerIQ uses AI to provide guidance. Always review suggestions and keep your own voice.</p>
+        </div>
+      </div>
+    </section>
+
+    @if (analysis(); as result) {
+      <section class="results-section section-pad" id="analysis-results" aria-labelledby="results-heading">
+        <div class="container">
+          <div class="results-header">
+            <div>
+              <span class="eyebrow">Your analysis</span>
+              <h2 id="results-heading">Insights for your next edit.</h2>
+              <p>Generated from the file or text you submitted. Use these insights as a guide, not a hiring prediction.</p>
+            </div>
+            <button type="button" class="button button-secondary results-reset" (click)="resetAnalysis()">Analyze another resume</button>
+          </div>
+          <div class="results-grid">
+            <article class="result-card skills-result">
+              <div class="result-card-heading"><span class="result-icon icon-mint" aria-hidden="true">⌘</span><div><span class="result-label">YOUR PROFILE</span><h3>Skills identified</h3></div></div>
+              @if (result.skills.length) {
+                <div class="skill-chips">
+                  @for (skill of result.skills; track skill) { <span>{{ skill }}</span> }
+                </div>
+              } @else {
+                <p class="empty-result">No skills were returned in this analysis.</p>
+              }
+            </article>
+            <article class="result-card">
+              <div class="result-card-heading"><span class="result-icon icon-mint" aria-hidden="true">✓</span><div><span class="result-label">WHAT'S WORKING</span><h3>Strengths</h3></div></div>
+              @if (result.strengths.length) {
+                <ul class="result-list">
+                  @for (strength of result.strengths; track strength) { <li><span class="list-marker positive" aria-hidden="true">✓</span>{{ strength }}</li> }
+                </ul>
+              } @else {
+                <p class="empty-result">No strengths were returned in this analysis.</p>
+              }
+            </article>
+            <article class="result-card">
+              <div class="result-card-heading"><span class="result-icon icon-amber" aria-hidden="true">⌁</span><div><span class="result-label">ROOM TO GROW</span><h3>Areas to improve</h3></div></div>
+              @if (result.weaknesses.length) {
+                <ul class="result-list">
+                  @for (weakness of result.weaknesses; track weakness) { <li><span class="list-marker opportunity" aria-hidden="true">↗</span>{{ weakness }}</li> }
+                </ul>
+              } @else {
+                <p class="empty-result">No improvement areas were returned in this analysis.</p>
+              }
+            </article>
+            <article class="result-card recommendations-result">
+              <div class="result-card-heading"><span class="result-icon icon-purple" aria-hidden="true">✦</span><div><span class="result-label">YOUR NEXT EDIT</span><h3>Recommendations</h3></div></div>
+              @if (result.recommendations.length) {
+                <ul class="result-list">
+                  @for (recommendation of result.recommendations; track recommendation) { <li><span class="list-marker recommendation-marker" aria-hidden="true">→</span>{{ recommendation }}</li> }
+                </ul>
+              } @else {
+                <p class="empty-result">No recommendations were returned in this analysis.</p>
+              }
+            </article>
+          </div>
+        </div>
+      </section>
+    }
+
+    <section class="testimonial-section section-pad">
+      <div class="container testimonial-panel">
+        <div class="quote-mark" aria-hidden="true">“</div>
+        <div class="testimonial-copy">
+          <span class="eyebrow">A little perspective goes a long way</span>
+          <blockquote>“The best next step is often the one you can finally see clearly.”</blockquote>
+          <p>CareerIQ is designed to help you notice what your resume is already saying — and decide what you'd like it to say next.</p>
+        </div>
+        <div class="demo-testimonial-label"><span class="demo-dot"></span> Brand message · not a customer testimonial</div>
+      </div>
+    </section>
+
+    <section class="faq-section section-pad" id="faq">
+      <div class="container faq-layout">
+        <div class="faq-intro">
+          <span class="eyebrow">Good to know</span>
+          <h2>Questions, <span>answered.</span></h2>
+          <p>A few details to help you get started with confidence.</p>
+          <a class="text-link" href="#analyzer">Try the resume analyzer <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="faq-list">
+          <details>
+            <summary>How does CareerIQ work?<span aria-hidden="true"></span></summary>
+            <p>Paste your resume text into the analyzer and submit it. CareerIQ sends that text to its AI analysis service, which returns skills, strengths, areas to improve, and recommendations.</p>
+          </details>
+          <details>
+            <summary>What happens to my resume data?<span aria-hidden="true"></span></summary>
+            <p>Resume text is sent to Groq's API for analysis. Avoid including sensitive information you do not want sent to that external service. CareerIQ does not permanently store the uploaded file.</p>
+          </details>
+          <details>
+            <summary>Can AI guarantee an interview or a specific score?<span aria-hidden="true"></span></summary>
+            <p>No. AI feedback can be incomplete or mistaken and is not a hiring decision, guarantee, or substitute for your own judgment. Review suggestions carefully and adapt only what feels accurate to you.</p>
+          </details>
+          <details>
+            <summary>How can I get the most useful feedback?<span aria-hidden="true"></span></summary>
+            <p>Include your full resume text with clear sections for experience, skills, and education. Be specific about your role and impact, then use the recommendations as a starting point for your own edits.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta-section">
+      <div class="container final-cta">
+        <div class="cta-decoration cta-decoration-one" aria-hidden="true"></div>
+        <div class="cta-decoration cta-decoration-two" aria-hidden="true"></div>
+        <span class="eyebrow eyebrow-light">Make your next move count</span>
+        <h2>Your experience has a story.<br><span>Let's make it stand out.</span></h2>
+        <p>Start with a clearer view of your resume and build from there.</p>
+        <a class="button button-light button-large" href="#analyzer">Analyze my resume <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-main">
+      <div class="footer-brand-block">
+        <a class="brand footer-brand" href="#home" aria-label="CareerIQ home">
+          <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 36 36" fill="none"><path d="M18 3.5 31 11v14L18 32.5 5 25V11L18 3.5Z" fill="currentColor" opacity=".14" /><path d="M12 23V13h3.1l6.9 6.1V13h3v10h-3l-7-6.2V23h-3Z" fill="currentColor" /></svg></span>
+          <span>Career<span class="brand-accent">IQ</span></span>
+        </a>
+        <p>Thoughtful AI insights for your next career move.</p>
+      </div>
+      <div class="footer-nav-group">
+        <span class="footer-nav-title">Explore</span>
+        <a href="#features">Features</a><a href="#how-it-works">How it works</a><a href="#benefits">Benefits</a>
+      </div>
+      <div class="footer-nav-group">
+        <span class="footer-nav-title">Get started</span>
+        <a href="#analyzer">Analyze my resume</a><a href="#faq">Frequently asked questions</a>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© 2026 CareerIQ. All rights reserved.</span>
+      <span>AI-powered perspective. Your career, your decisions.</span>
+    </div>
+  </footer>
+</div>
